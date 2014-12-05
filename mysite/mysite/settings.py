@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '7+twc92d)@vz)6+8#&hjp6@i!$ahts8zb1uo&ci#2lsah8z7=2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'stream_twitter',
+    'stream_django'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -81,3 +83,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STREAM_API_KEY = '3j3v8djsrqmg'
+STREAM_API_SECRET = 'ufbpdtb9gxy5j8bvpedbwtee92bq4t6gcqc3jkuttwqjcecxqcvsdz5fw5grp5tm'
