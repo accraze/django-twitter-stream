@@ -11,6 +11,13 @@ class Tweet(activity.Activity, models.Model):
     text = models.CharField(max_length=160)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def parse_mentions(self):
+        mentions = [slugify(i) for i in self.text.split() if i.startswith("@")]
+        return User.objects.filter(username__in=mentions)
+
+    def parse_hashtags(self):
+        return [slugify(i) for i in self.text.split() if i.startswith("#")]
+
     @property
     def activity_object_attr(self):
         return self
@@ -22,8 +29,7 @@ class Tweet(activity.Activity, models.Model):
             targets.append(feed_manager.get_feed('hashtag', hashtag))
         return targets
 
-    def parse_hashtags(self):
-        return [slugify(i) for i in self.text.split() if i.startswith("#")]
+    
 
 
 class Follow(models.Model):
