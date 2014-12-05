@@ -1,5 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import signals
+from django.template.defaultfilters import slugify
 from stream_django import activity
+from stream_django.feed_manager import feed_manager
 
 # Create your models here.
 class Tweet(activity.Activity, models.Model):
@@ -10,6 +14,16 @@ class Tweet(activity.Activity, models.Model):
     @property
     def activity_object_attr(self):
         return self
+
+    @property
+    def activity_notify(self):
+        targets = []
+        for hashtag in self.parse_hashtags():
+            targets.append(feed_manager.get_feed('hashtag', hashtag))
+        return targets
+
+    def parse_hashtags(self):
+        return [slugify(i) for i in self.text.split() if i.startswith("#")]
 
 
 class Follow(models.Model):

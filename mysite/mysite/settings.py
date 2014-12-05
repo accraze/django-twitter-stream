@@ -86,3 +86,5 @@ STATIC_URL = '/static/'
 
 STREAM_API_KEY = '3j3v8djsrqmg'
 STREAM_API_SECRET = 'ufbpdtb9gxy5j8bvpedbwtee92bq4t6gcqc3jkuttwqjcecxqcvsdz5fw5grp5tm'
+
+STREAM_NEWS_FEEDS = dict(flat='flat')
