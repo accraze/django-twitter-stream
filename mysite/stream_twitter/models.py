@@ -19,3 +19,13 @@ class Follow(models.Model):
 
     class Meta:
         unique_together = ('user', 'target')
+
+def unfollow_feed(sender, instance, **kwargs):
+	feed_manager.unfollow_user(instance.user_id, instance.target_id)
+
+def follow_feed(sender, instance, created, **kwargs):
+	if created:
+		feed_manager.follow_user(instance.user_id, instance.target_id)
+
+signals.post_delete.connect(unfollow_feed, sender=Follow)
+signals.post_save.connect(follow_feed, sender=Follow)
