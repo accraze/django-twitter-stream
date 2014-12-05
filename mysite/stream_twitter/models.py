@@ -1,10 +1,15 @@
 from django.db import models
+from stream_django import activity
 
 # Create your models here.
-class Tweet(models.Model):
+class Tweet(activity.Activity, models.Model):
     user = models.ForeignKey('auth.User')
     text = models.CharField(max_length=160)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def activity_object_attr(self):
+        return self
 
 
 class Follow(models.Model):
