@@ -1,0 +1,3 @@
+Django Twitter Stream app
+=========================
+Just messing around to see how real-time streaming works using Django and the GetStream.io API
